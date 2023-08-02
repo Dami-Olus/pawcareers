@@ -1,14 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import userService from '../../utils/userService'
 
-function SignupPage() {
+function SignupPage({handleSignUpOrLogin}) {
   const [state, setState] = useState({
     username: "",
     email: "",
     password: "",
     passwordConf: "",
-    photoUrl: "",
     consent: false
   });
+
+  const [selectedFile, setSelectedFile] = useState('')
+  const [error, setError] = useState('')
+
+  const navigate = useNavigate()
 
   function handleChange(e) {
     setState({
@@ -28,11 +34,35 @@ function SignupPage() {
     })
   }
 
+  async function handleSubmit(e){
+    e.preventDefault()
+
+    const formData = new FormData()
+    formData.append('photoUrl', selectedFile)
+    formData.append('username', state.username)
+    formData.append('email', state.email)
+    formData.append('password', state.password)
+
+    try {
+
+      const signUp = await userService.signup(formData)
+      navigate('/')
+      handleSignUpOrLogin()
+      
+
+    } catch (e) {
+      console.log(e, ' err in handleSubmit');
+				setError('Check your terminal for your error and the chrome console!')
+    }
+    
+  }
+
   return (
     <div className="border-2 border-[#407bff]">
       <form
         action=""
         className="flex flex-col gap-5 border-[1px] p-5 rounded-lg border-[#407bff]"
+        onSubmit={handleSubmit}
       >
         <input
           type="file"
