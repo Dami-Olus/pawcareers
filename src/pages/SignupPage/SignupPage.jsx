@@ -46,8 +46,8 @@ function SignupPage({handleSignUpOrLogin}) {
     try {
 
       const signUp = await userService.signup(formData)
-      navigate('/')
-      handleSignUpOrLogin()
+      navigate('/login')
+      // handleSignUpOrLogin()
       
 
     } catch (e) {

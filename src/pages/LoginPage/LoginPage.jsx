@@ -47,8 +47,8 @@ export default function LoginPage(props){
         
         <button className="bg-[#407BFF] py-2 rounded-md">Create Account</button>
         <p className="text-slate-500">
-          Already have an account?{" "}
-          <span className="text-[#407bff]">Log In</span>
+          Don't have an account?
+          <span className="text-[#407bff]">Sign Up</span>
         </p>
       </form>
     </div>
