@@ -1,20 +1,39 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import userService from '../../utils/userService';
 import './LoginPage.css';
 
 
-export default function LoginPage(props){
+export default function LoginPage({handleSignUpOrLogin}){
 
   const [state, setState] = useState({
     email: '',
     password: ''
   })
 
-  function handleSubmit(){
+  const [error, setError] = useState('')
 
+  const navigate = useNavigate()
+
+  async function handleSubmit(e){
+    e.preventDefault()
+
+    try {
+      const user = await userService.login(state)
+      navigate('/')
+      handleSignUpOrLogin()
+
+    } catch (e){
+      console.log(e, 'error in handleSubmit')
+      setError(e)
+    }
   }
 
-  function handleChange(){
-
+  function handleChange(e){
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    })
   }
    
 
