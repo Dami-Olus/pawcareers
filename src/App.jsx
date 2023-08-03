@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -9,24 +9,45 @@ import AddJob from "./components/modal/AddJob/AddJob";
 import AddPet from "./components/modal/AddPet/AddPet";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
+import JobFeed from "./pages/JobsFeed/JobFeed";
+
+import * as petApi from "./utils/petApi";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
   const [showPetModal, setShowPetModal] = useState(true);
   const [showJobModal, setShowJobModal] = useState(false);
   const [petData, setPetData] = useState({
-    name: '',
-    breed: '',
-    age: '',
-    location: '',
-    skills: ''
+    name: "",
+    breed: "",
+    age: "",
+    location: "",
+    skills: "",
   });
   const [jobData, setJobData] = useState({
-    title: '',
-    company: '',
-    location: '',
-    description: ''
+    title: "",
+    company: "",
+    location: "",
+    description: "",
   });
+  const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function getPets() {
+    try {
+      setLoading(true);
+      const pets = await petApi.getAll();
+      console.log(pets);
+      setPets(pets);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getPets();
+  }, []);
 
   function handleSignUpOrLogin() {
     setUser(userService.getUser());
@@ -34,14 +55,11 @@ function App() {
 
   function handlePetModal() {
     setShowPetModal(!showPetModal);
-    
   }
 
   function handleJobModal() {
     setShowJobModal(!showJobModal);
   }
-
-  
 
   function handlePetModalSkip() {
     setShowPetModal(false);
@@ -79,12 +97,21 @@ function App() {
             <HomePage
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
+              pets={pets}
+              loading={loading}
             />
           }
         />
         <Route
-          path="/login"
-          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          path="/jobs"
+          element={
+            <JobFeed
+              handlePetModal={handlePetModal}
+              handleJobModal={handleJobModal}
+              pets={pets}
+              loading={loading}
+            />
+          }
         />
         <Route
           path="/signup"

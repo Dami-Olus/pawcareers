@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
-function AddJob({handleJobModalSkip}) {
-  function handleSubmit() {}
-  function handleChange() {}
-  function handleFileInput() {}
+import * as jobApi from '../../../utils/jobApi'
+
+function AddJob({ handleJobModalSkip }) {
+  const [job, setJob] = useState({
+    name: "",
+    company: "",
+    description: "",
+    location: "",
+  });
+
+  const [selectedFile, setSelectedFile] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("photoUrl", selectedFile);
+
+    formData.append("name", job.name);
+    formData.append("company", job.company);
+    formData.append("description", job.description);
+    formData.append("location", job.location);
+
+    try {
+      const job = await jobApi.create(formData);
+      handleJobModalSkip();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function handleChange(e) {
+    setJob({
+      ...job,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handleFileInput(e) {
+    setSelectedFile(e.target.files[0]);
+  }
   function handleSkip() {
     handleJobModalSkip();
   }
@@ -24,7 +60,7 @@ function AddJob({handleJobModalSkip}) {
           />
           <input
             type="text"
-            name="title"
+            name="name"
             placeholder="Job Title"
             className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
@@ -36,7 +72,7 @@ function AddJob({handleJobModalSkip}) {
             className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
-          
+
           <input
             type="text"
             name="location"

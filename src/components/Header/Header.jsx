@@ -19,7 +19,10 @@ function Header() {
       </div>
       <div className="flex gap-5">
         <p>Home</p>
-        <p>Jobs</p>
+        <a onClick={() => {navigate('/jobs')}} className="cursor-pointer">
+          <p>Jobs</p>
+        </a>
+
         <p>Pets</p>
         <a onClick={handleSignOut} className="cursor-pointer">
           <p>Sign out</p>

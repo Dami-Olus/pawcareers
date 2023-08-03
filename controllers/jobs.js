@@ -40,8 +40,8 @@ async function create(req, res) {
     try {
       const job = await Job.create({
         name: req.body.name,
-        company: req.body.breed,
-        description: req.body.skills,
+        company: req.body.company,
+        description: req.body.description,
         location: req.body.location,
         user: req.user,
         photoUrl: data.Location,
@@ -50,7 +50,7 @@ async function create(req, res) {
 
       await job.populate("user");
 
-      res.status(201).json({ data: pet });
+      res.status(201).json({ data: job });
     } catch (e) {
       res.status(400).json({ error: e });
     }
