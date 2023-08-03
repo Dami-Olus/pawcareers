@@ -25,10 +25,14 @@ function App() {
     setShowJobModal(true)
   }
 
+  function handleJobModalSkip(){
+    setShowJobModal(false)
+  }
+
   return (
     <div>
       {showPetModal ? <AddPet handlePetModalSkip={handlePetModalSkip} /> : null}
-      {showJobModal ? <AddJob /> : null}
+      {showJobModal ? <AddJob handleJobModalSkip={handleJobModalSkip} /> : null}
       <Routes>
       <Route path="/" element={<HomePage/>} />
       <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
