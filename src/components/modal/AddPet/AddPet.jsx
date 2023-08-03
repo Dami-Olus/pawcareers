@@ -7,11 +7,11 @@ function AddPet({ handlePetModalSkip }) {
   }
   return (
     <div className="text-[#407bff] h-screen w-screen  absolute top-0 left-0 flex justify-center items-center">
-      <div className="h-screen w-screen absolute z-10 bg-[#407bff] opacity-10 top-0"></div>
+      <div className="h-screen w-screen absolute z-10 bg-[#407bff] opacity-80 top-0"></div>
       <div className="z-20">
         <form
           action=""
-          className="flex flex-col gap-5 border-[1px] p-5 rounded-lg border-[#407bff]"
+          className="flex flex-col gap-5 p-5 rounded-lg bg-white"
           onSubmit={handleSubmit}
         >
           <input
@@ -24,35 +24,35 @@ function AddPet({ handlePetModalSkip }) {
             type="text"
             name="name"
             placeholder="Pet name"
-            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent"
+            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
           <input
             type="text"
             name="breed"
             placeholder="Breed"
-            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent"
+            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
           <input
             type="number"
             name="age"
             placeholder="Age"
-            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent"
+            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
           <input
             type="text"
             name="location"
             placeholder="Location"
-            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent"
+            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
           <input
             type="text"
             name="skills"
             placeholder="Skills"
-            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent"
+            className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
 

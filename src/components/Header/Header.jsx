@@ -17,7 +17,7 @@ function Header() {
   }
   return (
     
-      <nav className="bg-white text-[#407bff] border-b-2 border-[#407bff] flex justify-evenly space-x-5 list-none absolute w-screen left-0 top-0 p-2">
+      <nav className="bg-white text-[#407bff] border-b-2 border-[#407bff] flex justify-evenly space-x-5 list-none  w-screen left-0 top-0 p-2 fixed ">
         <p className="flex-1">Logo</p>
           <p>Home</p>
           <p>Jobs</p>
