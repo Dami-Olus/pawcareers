@@ -8,7 +8,7 @@ import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 
 function HomePage({handleJobModal, handlePetModal}) {
   return (
-    <div className="h-screen w-screen mt-10">
+    <div className="h-screen w-screen  mt-10">
       <Header />
       <AddPetandJob handleJobModal={handleJobModal} handlePetModal={handlePetModal} />
       <div className="flex justify-between">

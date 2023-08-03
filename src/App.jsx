@@ -22,11 +22,10 @@ function App() {
     skills: ''
   });
   const [jobData, setJobData] = useState({
-    name: '',
-    breed: '',
-    age: '',
+    title: '',
+    company: '',
     location: '',
-    skills: ''
+    description: ''
   });
 
   function handleSignUpOrLogin() {
