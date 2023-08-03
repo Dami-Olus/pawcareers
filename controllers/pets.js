@@ -3,6 +3,7 @@ const Pet = require("../models/pet");
 const { v4: uuidv4 } = require("uuid");
 // import the s3 constructor
 const S3 = require("aws-sdk/clients/s3");
+const { response } = require("express");
 // initialize the S3 constructor so we have an object to talk to aws
 const s3 = new S3();
 
@@ -55,7 +56,14 @@ async function create(req, res) {
   });
 }
 
-function index() {}
+async function index(req,res) {
+  try {
+    const pets = await Pet.find({}).populate('user').exec()
+    res.status(200).json({ pets });
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 function show() {}
 

@@ -26,6 +26,7 @@ function AddPet({ handlePetModalSkip }) {
     
     try {
       const pet = await petApi.create(formData)
+      handlePetModalSkip();
     } catch (e) {
       console.log(e)
     }
