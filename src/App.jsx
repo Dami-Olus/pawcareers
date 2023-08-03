@@ -12,6 +12,8 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import JobFeed from "./pages/JobsFeed/JobFeed";
 
 import * as petApi from "./utils/petApi";
+import * as jobApi from "./utils/jobApi";
+import PetsFeed from "./pages/PetsFeed/PetsFeed";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -31,6 +33,7 @@ function App() {
     description: "",
   });
   const [pets, setPets] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function getPets() {
@@ -45,8 +48,21 @@ function App() {
     }
   }
 
+  async function getJobs() {
+    try {
+      setLoading(true);
+      const jobs = await jobApi.getAll();
+      console.log(jobs);
+      setJobs(jobs);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     getPets();
+    getJobs();
   }, []);
 
   function handleSignUpOrLogin() {
@@ -106,6 +122,7 @@ function App() {
           path="/jobs"
           element={
             <JobFeed
+            jobs={jobs}
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
@@ -114,8 +131,15 @@ function App() {
           }
         />
         <Route
-          path="/signup"
-          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          path="/pets"
+          element={
+            <PetsFeed
+              handlePetModal={handlePetModal}
+              handleJobModal={handleJobModal}
+              pets={pets}
+              loading={loading}
+            />
+          }
         />
       </Routes>
     </div>
