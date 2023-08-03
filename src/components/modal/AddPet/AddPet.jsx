@@ -1,7 +1,46 @@
+import { useState } from 'react'
+import * as petApi from '../../../utils/petApi'
+
 function AddPet({ handlePetModalSkip }) {
-  function handleSubmit() {}
-  function handleChange() {}
-  function handleFileInput() {}
+  const [pet, setPet] = useState({
+    name: '',
+    breed: '',
+    age: null,
+    location: '',
+    skills: '',
+  })
+
+  const [selectedFile, setSelectedFile] = useState('')
+  
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    const formData = new FormData()
+
+    formData.append('photoUrl', selectedFile)
+    formData.append('name', pet.name)
+    formData.append('breed', pet.breed)
+    formData.append('age', pet.age)
+    formData.append('location', pet.location)
+    formData.append('skills', pet.skills)
+    
+    try {
+      const pet = await petApi.create(formData)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+
+  function handleChange(e) {
+    setPet({
+      ...pet,
+      [e.target.name]: e.target.value
+    })
+  }
+  function handleFileInput(e) {
+    setSelectedFile(e.target.files[0])
+  }
   function handleSkip() {
     handlePetModalSkip();
   }

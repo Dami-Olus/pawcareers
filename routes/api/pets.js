@@ -6,12 +6,14 @@ const petCtrl = require('../../controllers/pets')
 const multer = require('multer');
 const upload = multer()
 
-router.post('/pets', petCtrl.create)
+router.post('/',upload.single('photoUrl'), petCtrl.create)
 
-router.get('/pets', petCtrl.index)
+router.get('/', petCtrl.index)
 
-router.get('/pets/:id', petCtrl.show)
+router.get('/:id', petCtrl.show)
 
-router.delete('/pets/:id', petCtrl.delete)
+router.delete('/:id', petCtrl.delete)
 
-router.put('/pets/:id', petCtrl.edit)
+router.put('/:id', petCtrl.edit)
+
+module.exports = router;
