@@ -58,14 +58,21 @@ async function create(req, res) {
 
 async function index(req,res) {
   try {
-    const pets = await Pet.find({}).populate('user').exec()
+    const pets = await Pet.find({user: req.user}).populate('user').exec()
     res.status(200).json({ pets });
   } catch (e) {
     console.log(e)
   }
 }
 
-function show() {}
+async function show(req,res) {
+  try {
+    const pet = await Pet.findById({id: req.params.id}).populate('user').exec()
+    res.status(200).json({ pet });
+  } catch (e) {
+    console.timeLog(e)
+  }
+}
 
 function edit() {}
 
