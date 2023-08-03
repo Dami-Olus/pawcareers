@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userService from '../../utils/userService'
+import userService from "../../utils/userService";
 
-function SignupPage({handleSignUpOrLogin}) {
+function SignupPage({ handleSignUpOrLogin }) {
   const [state, setState] = useState({
     username: "",
     email: "",
     password: "",
     passwordConf: "",
-    consent: false
+    consent: false,
   });
 
-  const [selectedFile, setSelectedFile] = useState('')
-  const [error, setError] = useState('')
+  const [selectedFile, setSelectedFile] = useState("");
+  const [error, setError] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setState({
@@ -27,34 +27,30 @@ function SignupPage({handleSignUpOrLogin}) {
     setSelectedFile(e.target.files[0]);
   }
 
-  function handleCheckBox(){
+  function handleCheckBox() {
     setState({
       ...state,
-      consent: !state.consent
-    })
+      consent: !state.consent,
+    });
   }
 
-  async function handleSubmit(e){
-    e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append('photoUrl', selectedFile)
-    formData.append('username', state.username)
-    formData.append('email', state.email)
-    formData.append('password', state.password)
+    const formData = new FormData();
+    formData.append("photoUrl", selectedFile);
+    formData.append("username", state.username);
+    formData.append("email", state.email);
+    formData.append("password", state.password);
 
     try {
-
-      const signUp = await userService.signup(formData)
-      navigate('/login')
+      const signUp = await userService.signup(formData);
+      navigate("/login");
       // handleSignUpOrLogin()
-      
-
     } catch (e) {
-      console.log(e, ' err in handleSubmit');
-				setError('Check your terminal for your error and the chrome console!')
+      console.log(e, " err in handleSubmit");
+      setError("Check your terminal for your error and the chrome console!");
     }
-    
   }
 
   return (
@@ -104,7 +100,13 @@ function SignupPage({handleSignUpOrLogin}) {
           onChange={handleChange}
         />
         <div className="flex gap-5 ml-5">
-          <input type="checkbox" name="consent" id="" checked={state.consent} onChange={handleCheckBox} />
+          <input
+            type="checkbox"
+            name="consent"
+            id=""
+            checked={state.consent}
+            onChange={handleCheckBox}
+          />
           <p className="text-[#407BFF]">
             I have read and agreed to the terms of services and privacy policy
           </p>
@@ -112,7 +114,9 @@ function SignupPage({handleSignUpOrLogin}) {
         <button className="bg-[#407BFF] py-2 rounded-md">Create Account</button>
         <p className="text-slate-500">
           Already have an account?{" "}
-          <span className="text-[#407bff]">Log In</span>
+          <span className="text-[#407bff]">
+            <a href="" onClick={()=> navigate('/login')}> Log In</a>
+          </span>
         </p>
       </form>
     </div>

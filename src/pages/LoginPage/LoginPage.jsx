@@ -67,7 +67,9 @@ export default function LoginPage({handleSignUpOrLogin}){
         <button className="bg-[#407BFF] py-2 rounded-md">Create Account</button>
         <p className="text-slate-500">
           Don't have an account?
-          <span className="text-[#407bff]">Sign Up</span>
+          <span className="text-[#407bff]">
+            <a href="" onClick={()=> navigate('/signup')}>Sign Up</a>
+            </span>
         </p>
       </form>
     </div>
