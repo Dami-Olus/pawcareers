@@ -20,5 +20,62 @@ module.exports = {
   // delete: deleteJob,
 };
 
+async function create(req, res) {
+  console.log(req.body, req.user, req.file);
+  if (!req.file)
+    return res.status(400).json({ error: "Please Submit a Photo" });
+  const filePath = `pawcareers/jobs/${uuidv4()}-${req.file.originalname}`;
+  const params = { Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer };
+  s3.upload(params, async function (err, data) {
+    if (err) {
+      console.log("===========================================");
+      console.log(
+        err,
+        " err from aws, either your bucket name is wrong or your keys arent correct"
+      );
+      console.log("===========================================");
+      res.status(400).json({ error: "Error from aws, check your terminal!" });
+    }
 
+    try {
+      const job = await Job.create({
+        name: req.body.name,
+        company: req.body.breed,
+        description: req.body.skills,
+        location: req.body.location,
+        user: req.user,
+        photoUrl: data.Location,
+        
+      });
+
+      await job.populate("user");
+
+      res.status(201).json({ data: pet });
+    } catch (e) {
+      res.status(400).json({ error: e });
+    }
+  });
+}
+
+async function index(req,res) {
+  try {
+    const jobs = await Job.find({}).populate('user').exec()
+    res.status(200).json({ jobs });
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+async function show(req,res) {
+  try {
+    const pet = await Job.findById({id: req.params.id}).populate('user').exec()
+    res.status(200).json({ pet });
+  } catch (e) {
+    console.timeLog(e)
+  }
+}
+
+function edit() {}
+
+function deletePet() {}
 
