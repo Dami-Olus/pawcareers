@@ -2,7 +2,7 @@ import React from "react";
 
 function PostGallery() {
   return (
-    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-col items-center flex-[0.6] p-8">
+    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-col items-center p-8 flex-[0.6]">
       <div>
         <form action="" className="flex flex-col gap-2 mb-5">
           <input type="file" />

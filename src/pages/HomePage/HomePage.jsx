@@ -17,13 +17,13 @@ function HomePage({ handleJobModal, handlePetModal, loading, pets }) {
     );
 
   return (
-    <div className="h-screen w-screen  mt-10">
+    <div className="h-screen  mt-10">
       <Header />
       <AddPetandJob
         handleJobModal={handleJobModal}
         handlePetModal={handlePetModal}
       />
-      <div className="flex justify-between">
+      <div className="flex justify-evenly">
         <ProfileWidget pet={pets} />
         <PostGallery />
         <AdGallery />

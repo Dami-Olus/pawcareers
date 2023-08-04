@@ -44,7 +44,7 @@ function AddJob({ handleJobModalSkip }) {
     handleJobModalSkip();
   }
   return (
-    <div className="text-[#407bff] h-screen w-screen  absolute top-0 left-0 flex justify-center items-center">
+    <div className="text-[#407bff] h-screen w-screen  absolute top-0 left-0 bottom-0 flex justify-center items-center">
       <div className="h-screen w-screen absolute z-10 bg-[#407bff] opacity-80 top-0"></div>
       <div className="z-20">
         <form

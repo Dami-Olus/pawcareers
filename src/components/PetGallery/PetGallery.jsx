@@ -10,7 +10,7 @@ function PetGallery({ pets }) {
 
   
   return (
-    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-wrap gap-5 items-center flex-[0.6] p-8">
+    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-wrap gap-5 justify-center items-center flex-[0.6] p-8">
       {petCards}
     </div>
   );
