@@ -27,3 +27,16 @@ export function create(data){
       throw new Error('Something went wrong in getAll jobs')
     })
   }
+
+  export function getOne(jobId){
+    
+    return fetch(`${BASE_URL}${jobId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: "Bearer " + tokenService.getToken()
+      }
+    }).then(res => {
+      if(res.ok) return res.json();
+      throw new Error('Something went wrong in getAll jobs')
+    })
+  }

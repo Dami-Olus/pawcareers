@@ -66,10 +66,21 @@ async function index(req,res) {
   }
 }
 
+// async function show(req,res) {
+//   console.log(req.params)
+//   try {
+//     const job = await Job.findById({_id: req.params.id}).populate('user').exec()
+//     res.status(200).json({ job });
+//   } catch (e) {
+//     console.timeLog(e)
+//   }
+// }
+
 async function show(req,res) {
+  
   try {
-    const pet = await Job.findById({id: req.params.id}).populate('user').exec()
-    res.status(200).json({ pet });
+    const job = await Job.findById({_id: req.params.id}).populate('user').exec()
+    res.status(200).json({ job });
   } catch (e) {
     console.timeLog(e)
   }

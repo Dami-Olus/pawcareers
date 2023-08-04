@@ -6,7 +6,7 @@ function PetCard({ pets }) {
   return (
     <div
       className="bg-[#407bff] h-[400px] w-[400px] flex flex-col  mb-5"
-      onClick={() => console.log("hello")}
+      onClick={()=>navigate(`/petsPage/${pets._id}`)}
     >
       <div className="text-white">
         <img src={pets?.photoUrl} alt="" />

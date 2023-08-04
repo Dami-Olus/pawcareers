@@ -67,7 +67,8 @@ async function index(req,res) {
 
 async function show(req,res) {
   try {
-    const pet = await Pet.findById({id: req.params.id}).populate('user').exec()
+    
+    const pet = await Pet.findById({_id: req.params.id}).populate('user').exec()
     res.status(200).json({ pet });
   } catch (e) {
     console.timeLog(e)

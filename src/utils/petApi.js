@@ -27,3 +27,16 @@ export function getAll(){
     throw new Error('Something went wrong in getAll Pet')
   })
 }
+
+export function getOne(petId){
+    
+  return fetch(`${BASE_URL}${petId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: "Bearer " + tokenService.getToken()
+    }
+  }).then(res => {
+    if(res.ok) return res.json();
+    throw new Error('Something went wrong in getAll jobs')
+  })
+}

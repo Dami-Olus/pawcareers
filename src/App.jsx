@@ -15,6 +15,7 @@ import * as petApi from "./utils/petApi";
 import * as jobApi from "./utils/jobApi";
 import PetsFeed from "./pages/PetsFeed/PetsFeed";
 import JobsPage from "./pages/JobsPage/JobsPage";
+import PetsPage from "./pages/PetsPage/PetsPage";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -123,7 +124,7 @@ function App() {
           path="/jobs"
           element={
             <JobFeed
-            jobs={jobs}
+              jobs={jobs}
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
@@ -140,7 +141,6 @@ function App() {
               pets={pets}
               loading={loading}
             />
-            
           }
         />
         <Route
@@ -153,10 +153,21 @@ function App() {
               jobs={jobs}
               loading={loading}
             />
-            
           }
         />
-        
+
+        <Route
+          path="/petspage/:id"
+          element={
+            <PetsPage
+              handlePetModal={handlePetModal}
+              handleJobModal={handleJobModal}
+              pets={pets}
+              jobs={jobs}
+              loading={loading}
+            />
+          }
+        />
       </Routes>
     </div>
   );

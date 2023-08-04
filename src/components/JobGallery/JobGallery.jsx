@@ -4,7 +4,7 @@ import JobCard from "../JobCard/JobCard";
 function JobGallery({jobs}) {
 console.log(jobs)
   const jobCards = jobs.jobs.map((job) => {
-    return <JobCard jobs={job}/>
+    return <JobCard key={job._id} jobs={job}/>
   })
 
   return (
