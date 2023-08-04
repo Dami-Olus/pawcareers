@@ -17,6 +17,7 @@ import * as postApi from "./utils/postApi";
 import PetsFeed from "./pages/PetsFeed/PetsFeed";
 import JobsPage from "./pages/JobsPage/JobsPage";
 import PetsPage from "./pages/PetsPage/PetsPage";
+import EditPost from "./components/EditPost/EditPost";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
@@ -63,8 +64,6 @@ function App() {
       console.log(e);
     }
   }
-
- 
 
   async function getJobs() {
     try {
@@ -183,6 +182,14 @@ function App() {
               pets={pets}
               jobs={jobs}
               loading={loading}
+            />
+          }
+        />
+
+        <Route
+          path="/posts/:id/edit"
+          element={
+            <EditPost
             />
           }
         />
