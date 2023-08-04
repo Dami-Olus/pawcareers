@@ -25,6 +25,7 @@ app.use("/api/users", require("./routes/api/users"));
 
 app.use('/api/pets', require("./routes/api/pets"));
 app.use('/api/jobs', require("./routes/api/jobs"));
+app.use('/api/posts', require("./routes/api/posts"));
 
 // "catch all" route
 app.get('/*', function(req, res) {
