@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PostCard from "../PostCard/PostCard";
 import * as postApi from "../../utils/postApi"
 
-function PostGallery({posts}) {
+function PostGallery({posts, loading}) {
   const [post, setPost] = useState({});
   const [selectedFile, setSelectedFile] = useState();
 
@@ -34,6 +34,10 @@ function PostGallery({posts}) {
   const postCards = posts?.posts.map(post => {
     return <PostCard post={post} />
   })
+
+  if(loading)return (
+    <div>Loading</div>
+  )
 
   return (
     <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-col items-center p-8 flex-[0.6]">

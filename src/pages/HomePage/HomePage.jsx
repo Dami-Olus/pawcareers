@@ -25,7 +25,7 @@ function HomePage({ handleJobModal, handlePetModal, loading, pets, posts }) {
       />
       <div className="flex justify-evenly">
         <ProfileWidget pet={pets} />
-        <PostGallery posts={posts} />
+        <PostGallery posts={posts} loading={loading} />
         <AdGallery />
       </div>
     </div>
