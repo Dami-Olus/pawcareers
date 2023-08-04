@@ -13,6 +13,7 @@ import JobFeed from "./pages/JobsFeed/JobFeed";
 
 import * as petApi from "./utils/petApi";
 import * as jobApi from "./utils/jobApi";
+import * as postApi from "./utils/postApi";
 import PetsFeed from "./pages/PetsFeed/PetsFeed";
 import JobsPage from "./pages/JobsPage/JobsPage";
 import PetsPage from "./pages/PetsPage/PetsPage";
@@ -36,6 +37,7 @@ function App() {
   });
   const [pets, setPets] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function getPets() {
@@ -49,6 +51,20 @@ function App() {
       console.log(e);
     }
   }
+
+  async function getPosts() {
+    try {
+      setLoading(true);
+      const posts = await postApi.getAll();
+      console.log(posts);
+      setPosts(posts);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+ 
 
   async function getJobs() {
     try {
@@ -65,6 +81,7 @@ function App() {
   useEffect(() => {
     getPets();
     getJobs();
+    getPosts();
   }, []);
 
   function handleSignUpOrLogin() {
@@ -116,6 +133,7 @@ function App() {
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
+              posts={posts}
               loading={loading}
             />
           }

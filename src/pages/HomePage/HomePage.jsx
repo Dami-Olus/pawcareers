@@ -8,7 +8,7 @@ import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 
 
 
-function HomePage({ handleJobModal, handlePetModal, loading, pets }) {
+function HomePage({ handleJobModal, handlePetModal, loading, pets, posts }) {
   if (loading)
     return (
       <div>
@@ -25,7 +25,7 @@ function HomePage({ handleJobModal, handlePetModal, loading, pets }) {
       />
       <div className="flex justify-evenly">
         <ProfileWidget pet={pets} />
-        <PostGallery />
+        <PostGallery posts={posts} />
         <AdGallery />
       </div>
     </div>
