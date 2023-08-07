@@ -131,7 +131,7 @@ function App() {
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
-             
+             user={user}
               loading={loading}
             />
           }

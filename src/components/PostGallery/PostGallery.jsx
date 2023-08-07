@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "../PostCard/PostCard";
 import * as postApi from "../../utils/postApi";
+import * as likeApi from "../../utils/likeApi";
 
-function PostGallery() {
+function PostGallery({ user}) {
   // const [post, setPost] = useState({});
   const [selectedFile, setSelectedFile] = useState();
   const [posts, setPosts] = useState();
@@ -10,6 +11,33 @@ function PostGallery() {
   const [loading, setLoading] = useState(true);
 
   console.log(posts)
+
+  const [error, setError] = useState()
+
+
+  async function addLike(postId) {
+    try {
+      const response = await likeApi.create(postId);
+      // to update state we are just going to refetch the posts, because they will the updated
+      // likes
+      getPosts(); // this funciton updates state
+    } catch (err) {
+      setError("error creating like");
+      console.log(err, " error");
+    }
+  }
+
+  async function removeLike(likeId) {
+    try {
+      const response = await likeApi.removeLike(likeId);
+      // to update state we are just going to refetch the posts, because they will the updated
+      // likes
+      getPosts(); // this funciton updates state
+    } catch (err) {
+      setError("error creating like");
+      console.log(err, " error");
+    }
+  }
 
   async function getPosts() {
     try {
@@ -51,7 +79,7 @@ function PostGallery() {
   }, []);
 
   const postCards = posts?.map((post) => {
-    return <PostCard key={post._id} post={post} />;
+    return <PostCard key={post._id} post={post} addLike={addLike} removeLike={removeLike} user={user} />;
   });
 
   if (loading) return <div></div>;
