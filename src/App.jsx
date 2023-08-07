@@ -3,25 +3,26 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import userService from "./utils/userService";
-
-import HomePage from "./pages/HomePage/HomePage";
-import AddJob from "./components/modal/AddJob/AddJob";
-import AddPet from "./components/modal/AddPet/AddPet";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import JobFeed from "./pages/JobsFeed/JobFeed";
-
 import * as petApi from "./utils/petApi";
 import * as jobApi from "./utils/jobApi";
 import * as postApi from "./utils/postApi";
+
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignupPage from "./pages/SignupPage/SignupPage";
+import HomePage from "./pages/HomePage/HomePage";
 import PetsFeed from "./pages/PetsFeed/PetsFeed";
+import JobFeed from "./pages/JobsFeed/JobFeed";
 import JobsPage from "./pages/JobsPage/JobsPage";
 import PetsPage from "./pages/PetsPage/PetsPage";
+
+import AddJob from "./components/modal/AddJob/AddJob";
+import AddPet from "./components/modal/AddPet/AddPet";
 import EditPost from "./components/EditPost/EditPost";
+import Header from "./components/Header/Header";
 
 function App() {
   const [user, setUser] = useState(userService.getUser());
-  const [showPetModal, setShowPetModal] = useState(true);
+  const [showPetModal, setShowPetModal] = useState(false);
   const [showJobModal, setShowJobModal] = useState(false);
   const [petData, setPetData] = useState({
     name: "",
@@ -38,7 +39,7 @@ function App() {
   });
   const [pets, setPets] = useState([]);
   const [jobs, setJobs] = useState([]);
-  const [posts, setPosts] = useState([]);
+  
   const [loading, setLoading] = useState(true);
 
   async function getPets() {
@@ -53,17 +54,7 @@ function App() {
     }
   }
 
-  async function getPosts() {
-    try {
-      setLoading(true);
-      const posts = await postApi.getAll();
-      console.log(posts);
-      setPosts(posts);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  
 
   async function getJobs() {
     try {
@@ -80,12 +71,18 @@ function App() {
   useEffect(() => {
     getPets();
     getJobs();
-    getPosts();
+    
   }, []);
 
   function handleSignUpOrLogin() {
     setUser(userService.getUser());
   }
+
+  function handleSignOut() {
+    userService.logout();
+    setUser(null)
+     navigate("/login");
+ }
 
   function handlePetModal() {
     setShowPetModal(!showPetModal);
@@ -97,7 +94,7 @@ function App() {
 
   function handlePetModalSkip() {
     setShowPetModal(false);
-    setShowJobModal(true);
+    
   }
 
   function handleJobModalSkip() {
@@ -122,17 +119,19 @@ function App() {
 
   return (
     <div>
-      {showPetModal ? <AddPet handlePetModalSkip={handlePetModalSkip} /> : null}
-      {showJobModal ? <AddJob handleJobModalSkip={handleJobModalSkip} /> : null}
+      {showPetModal && <AddPet handlePetModalSkip={handlePetModalSkip} />}
+      {showJobModal && <AddJob handleJobModalSkip={handleJobModalSkip} />}
+      <Header />
       <Routes>
         <Route
           path="/"
           element={
             <HomePage
+              modalOpen={showPetModal || showJobModal}
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
-              posts={posts}
+             
               loading={loading}
             />
           }
@@ -186,13 +185,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/posts/:id/edit"
-          element={
-            <EditPost
-            />
-          }
-        />
+        <Route path="/posts/:id/edit" element={<EditPost />} />
       </Routes>
     </div>
   );

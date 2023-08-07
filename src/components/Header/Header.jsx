@@ -1,17 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import userService from "../../utils/userService";
 
-function Header() {
+function Header({handleSignOut}) {
   const navigate = useNavigate();
 
-  async function handleSignOut() {
-    try {
-      const signOut = await userService.logout();
-      navigate("/login");
-    } catch (e) {
-      console.log(e);
-    }
-  }
+ 
   return (
     <nav className="bg-white text-[#407bff] border-b-2 border-[#407bff] flex justify-end space-x-5 list-none  w-screen left-0 top-0 fixed ">
       <div className="flex-grow fixed left-5">

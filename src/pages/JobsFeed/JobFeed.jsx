@@ -16,7 +16,7 @@ function JobFeed({ handleJobModal, handlePetModal, loading, pets,jobs }) {
 
   return (
     <div className="h-screen   mt-10">
-      <Header />
+      {/* <Header /> */}
       <AddPetandJob
         handleJobModal={handleJobModal}
         handlePetModal={handlePetModal}

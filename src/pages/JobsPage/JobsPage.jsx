@@ -38,7 +38,7 @@ getJob()
     );
   return (
     <div className="flex">
-      <Header />
+      {/* <Header /> */}
       <JobGallery jobs={jobs} />
       <JobDetails job={job} />
     </div>
