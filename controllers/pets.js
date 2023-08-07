@@ -58,7 +58,7 @@ async function create(req, res) {
 
 async function index(req,res) {
   try {
-    const pets = await Pet.find({user: req.user}).populate('user').exec()
+    const pets = await Pet.find().populate('user').exec()
     res.status(200).json({ pets });
   } catch (e) {
     console.log(e)

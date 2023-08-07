@@ -1,23 +1,17 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
 
-function ProfileWidget({ pet }) {
-  console.log(pet);
+function ProfileWidget({ pet, user }) {
   return (
-    <div className="text-white h-[500px] mt-20 ml-10 rounded-md bg-[#407bff] flex flex-col items-center sticky top-44 p-10">
-
-      <div className="rounded-full">
-        <img
-          src={pet.pets[1]?.photoUrl}
-          alt=""
-          className="object-cover h-16 rounded-full"
-        />
-      </div>
+    <div className="text-white h-[500px] mt-20  rounded-md bg-[#407bff] flex sticky top-44 p-10 ml-20 w-[400px] overflow-y-scroll gap-2">
      
+     
+     {pet.pets.map((pet) => {
+      if(pet.user.username === user.username){
+      return  <img src={pet.photoUrl} alt="" className="h-24 rounded-full" />}
+     })}
+    
 
-      <p className="mt-3">Pet name</p>
-      <p className="mt-3">Breed</p>
-      <p className="mt-3">More details</p>
     </div>
   );
 }

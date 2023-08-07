@@ -5,7 +5,8 @@ import "./App.css";
 import userService from "./utils/userService";
 import * as petApi from "./utils/petApi";
 import * as jobApi from "./utils/jobApi";
-import * as postApi from "./utils/postApi";
+
+
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
@@ -42,6 +43,7 @@ function App() {
   
   const [loading, setLoading] = useState(true);
 
+  
   async function getPets() {
     try {
       setLoading(true);
@@ -121,7 +123,7 @@ function App() {
     <div>
       {showPetModal && <AddPet handlePetModalSkip={handlePetModalSkip} />}
       {showJobModal && <AddJob handleJobModalSkip={handleJobModalSkip} />}
-      <Header />
+      <Header handleSignOut={handleSignOut} />
       <Routes>
         <Route
           path="/"

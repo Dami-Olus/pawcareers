@@ -2,9 +2,9 @@ import React from "react";
 
 function JobDetails({ job }) {
   return (
-    <div className="text-[#407bff] flex flex-col items-center justify-center mt-20">
+    <div className="text-[#407bff] flex flex-col items-center mt-20">
       <div>
-      <img src={job?.job.photoUrl} alt="" />
+      <img src={job?.job.photoUrl} alt="" className="h-[400px]" />
       </div>
      
       <p>{job?.job.name}</p>

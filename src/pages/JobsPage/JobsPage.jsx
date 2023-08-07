@@ -37,7 +37,7 @@ getJob()
       </div>
     );
   return (
-    <div className="flex">
+    <div className="flex h-screen overflow-y-hidden">
       {/* <Header /> */}
       <JobGallery jobs={jobs} />
       <JobDetails job={job} />

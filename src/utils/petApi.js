@@ -28,6 +28,8 @@ export function getAll(){
   })
 }
 
+
+
 export function getOne(petId){
     
   return fetch(`${BASE_URL}${petId}`, {

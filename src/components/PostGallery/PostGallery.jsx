@@ -85,7 +85,7 @@ function PostGallery({ user}) {
   // if (loading) return <div></div>;
 
   return (
-    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-col items-center p-8 flex-[0.6]">
+    <div className="text-[#407bff]  mt-20 ml-10 mr-10  rounded-md  flex flex-col items-center p-8 flex-1 ">
       <div>
         <form
           action=""

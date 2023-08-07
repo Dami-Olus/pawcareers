@@ -1,46 +1,66 @@
-import { useState } from 'react'
-import * as petApi from '../../../utils/petApi'
+import { useEffect, useState } from "react";
+import * as petApi from "../../../utils/petApi";
+import * as dogInfoApi from "../../../utils/dogInfoApi";
+// import { options } from "../../../../routes/api/likes";
 
 function AddPet({ handlePetModalSkip }) {
   const [pet, setPet] = useState({
-    name: '',
-    breed: '',
+    name: "",
+    breed: "",
     age: null,
-    location: '',
-    skills: '',
-  })
+    location: "",
+    skills: "",
+  });
 
-  const [selectedFile, setSelectedFile] = useState('')
-  
-  async function handleSubmit(e) {
-    e.preventDefault()
+  const [selectedFile, setSelectedFile] = useState("");
+  const [breeds, setBreeds] = useState([]);
 
-    const formData = new FormData()
 
-    formData.append('photoUrl', selectedFile)
-    formData.append('name', pet.name)
-    formData.append('breed', pet.breed)
-    formData.append('age', pet.age)
-    formData.append('location', pet.location)
-    formData.append('skills', pet.skills)
-    
+  async function dogBreeds() {
     try {
-      const pet = await petApi.create(formData)
-      handlePetModalSkip();
+      const breeds = await dogInfoApi.getBreeds();
+
+      const data = breeds.message;
+      // console.log(data)
+      setBreeds(data);
+      
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
+  useEffect(() => {
+    dogBreeds();
+  }, []);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("photoUrl", selectedFile);
+    formData.append("name", pet.name);
+    formData.append("breed", pet.breed);
+    formData.append("age", pet.age);
+    formData.append("location", pet.location);
+    formData.append("skills", pet.skills);
+
+    try {
+      const pet = await petApi.create(formData);
+      handlePetModalSkip();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   function handleChange(e) {
     setPet({
       ...pet,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   }
   function handleFileInput(e) {
-    setSelectedFile(e.target.files[0])
+    setSelectedFile(e.target.files[0]);
   }
   function handleSkip() {
     handlePetModalSkip();
@@ -67,13 +87,26 @@ function AddPet({ handlePetModalSkip }) {
             className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
           />
-          <input
+          <select name="breed" id="" onChange={handleChange}>
+          {Object.keys(breeds).map((key, index) => {
+        return (
+          <option key={index} value={key}>
+            <h2>
+              {key}
+            </h2>
+
+            <hr />
+          </option>
+        );
+      })}
+          </select>
+          {/* <input
             type="text"
             name="breed"
             placeholder="Breed"
             className="border-b-2 border-blue-100 ml-5 rounded-md text-[#407bff] bg-transparent placeholder-[#407bff]"
             onChange={handleChange}
-          />
+          /> */}
           <input
             type="number"
             name="age"
