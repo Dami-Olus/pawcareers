@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import userService from "./utils/userService";
 import * as petApi from "./utils/petApi";
 import * as jobApi from "./utils/jobApi";
-
-
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
@@ -40,10 +38,10 @@ function App() {
   });
   const [pets, setPets] = useState([]);
   const [jobs, setJobs] = useState([]);
-  
-  const [loading, setLoading] = useState(true);
 
-  
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
+
   async function getPets() {
     try {
       setLoading(true);
@@ -55,8 +53,6 @@ function App() {
       console.log(e);
     }
   }
-
-  
 
   async function getJobs() {
     try {
@@ -73,7 +69,6 @@ function App() {
   useEffect(() => {
     getPets();
     getJobs();
-    
   }, []);
 
   function handleSignUpOrLogin() {
@@ -81,10 +76,11 @@ function App() {
   }
 
   function handleSignOut() {
+    navigate("/login");
     userService.logout();
-    setUser(null)
-     navigate("/login");
- }
+
+    setUser(null);
+  }
 
   function handlePetModal() {
     setShowPetModal(!showPetModal);
@@ -96,7 +92,6 @@ function App() {
 
   function handlePetModalSkip() {
     setShowPetModal(false);
-    
   }
 
   function handleJobModalSkip() {
@@ -105,7 +100,7 @@ function App() {
 
   if (!user)
     return (
-      <div>
+      <div className="flex justify-center items-center h-screen w-screen">
         <Routes>
           <Route
             path="/login"
@@ -115,6 +110,7 @@ function App() {
             path="/signup"
             element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
           />
+          <Route path="/*" element={<Navigate to='/login' />} />
         </Routes>
       </div>
     );
@@ -133,7 +129,7 @@ function App() {
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
-             user={user}
+              user={user}
               loading={loading}
             />
           }
@@ -146,6 +142,7 @@ function App() {
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
+              user={user}
               loading={loading}
             />
           }
@@ -157,6 +154,7 @@ function App() {
               handlePetModal={handlePetModal}
               handleJobModal={handleJobModal}
               pets={pets}
+              user={user}
               loading={loading}
             />
           }

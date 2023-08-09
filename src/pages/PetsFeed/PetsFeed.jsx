@@ -6,7 +6,7 @@ import PetGallery from "../../components/PetGallery/PetGallery";
 import PostGallery from "../../components/PostGallery/PostGallery";
 import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 
-function PetsFeed({ handleJobModal, handlePetModal, loading, pets }) {
+function PetsFeed({ handleJobModal, handlePetModal, loading, pets, user }) {
   if (loading)
     return (
       <div>
@@ -22,7 +22,7 @@ function PetsFeed({ handleJobModal, handlePetModal, loading, pets }) {
         handlePetModal={handlePetModal}
       />
       <div className="flex justify-between">
-        <ProfileWidget pet={pets} />
+        <ProfileWidget pet={pets} user={user} />
         <PetGallery pets={pets} />
         <AdGallery />
       </div>

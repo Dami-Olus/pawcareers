@@ -6,7 +6,7 @@ import JobGallery from "../../components/JobGallery/JobGallery";
 import PostGallery from "../../components/PostGallery/PostGallery";
 import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 
-function JobFeed({ handleJobModal, handlePetModal, loading, pets,jobs }) {
+function JobFeed({ handleJobModal, handlePetModal, loading, pets,jobs, user }) {
   if (loading)
     return (
       <div>
@@ -22,7 +22,7 @@ function JobFeed({ handleJobModal, handlePetModal, loading, pets,jobs }) {
         handlePetModal={handlePetModal}
       />
       <div className="flex justify-between">
-        <ProfileWidget pet={pets} />
+        <ProfileWidget pet={pets} user={user} />
         <JobGallery jobs={jobs} />
         <AdGallery />
       </div>
