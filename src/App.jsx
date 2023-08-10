@@ -119,7 +119,7 @@ function App() {
     <div>
       {showPetModal && <AddPet handlePetModalSkip={handlePetModalSkip} />}
       {showJobModal && <AddJob handleJobModalSkip={handleJobModalSkip} />}
-      <Header handleSignOut={handleSignOut} />
+      <Header handleSignOut={handleSignOut} user={user} />
       <Routes>
         <Route
           path="/"

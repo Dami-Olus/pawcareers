@@ -7,12 +7,7 @@ import PostGallery from "../../components/PostGallery/PostGallery";
 import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 
 function PetsFeed({ handleJobModal, handlePetModal, loading, pets, user }) {
-  if (loading)
-    return (
-      <div>
-        <h1> Loading</h1>
-      </div>
-    );
+  if (loading) return <div></div>;
 
   return (
     <div className="h-screen mt-10">

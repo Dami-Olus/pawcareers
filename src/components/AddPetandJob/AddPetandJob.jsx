@@ -2,10 +2,14 @@ import React from "react";
 
 function AddPetandJob({ handlePetModal, handleJobModal }) {
   return (
-    <div className="top-20 bg-yellow-200 flex gap-5 sticky">
-      <button onClick={handlePetModal} className="text-[#407bff] py-2 rounded-md w-32 ">Add Pet</button>
+    <div className=" text-white flex gap-5 text-2xl mb-10 ">
+      <button onClick={handlePetModal} className=" rounded-md w-32 ">
+        Add Pet
+      </button>
 
-      <button onClick={handleJobModal} className="text-[#407bff] py-2 rounded-md w-32 ">Add Job</button>
+      <button onClick={handleJobModal} className="  rounded-md w-32 ">
+        Add Job
+      </button>
     </div>
   );
 }

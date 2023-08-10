@@ -29,12 +29,9 @@ function HomePage({
       } `}
     >
       {/* <Header /> */}
-      <AddPetandJob
-        handleJobModal={handleJobModal}
-        handlePetModal={handlePetModal}
-      />
+      
       <div className="flex justify-center">
-        <ProfileWidget pet={pets} user={user} />
+        <ProfileWidget pet={pets} user={user} handlePetModal={handlePetModal} handleJobModal={handleJobModal} />
         <PostGallery posts={posts} loading={loading} user={user} />
         <AdGallery />
       </div>

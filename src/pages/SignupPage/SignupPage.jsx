@@ -54,7 +54,8 @@ function SignupPage({ handleSignUpOrLogin }) {
   }
 
   return (
-    <div className="border-2 border-[#407bff]">
+    <div className="border-2 border-[#407bff] flex">
+       <img src='https://i.imgur.com/J9TSS4Y.png' alt="Vite logo" className='h-72' />
       <form
         action=""
         className="flex flex-col gap-5 border-[1px] p-5 rounded-lg border-[#407bff]"
