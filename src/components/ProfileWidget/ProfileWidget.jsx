@@ -16,7 +16,7 @@ function ProfileWidget({ pet, user, handleJobModal, handlePetModal }) {
         {pet?.pets.map((pet) => {
           if (pet.user.username === user.username) {
             return (
-              <img src={pet.photoUrl} alt="" className="h-24 rounded-full" />
+              <img key={pet._id} src={pet.photoUrl} alt="" className="h-24 rounded-full" />
             );
           }
         })}

@@ -11,9 +11,10 @@ function PetCard({ pets }) {
       <div className="text-white">
         <img src={pets?.photoUrl} alt="" />
       </div>
-      <div className="text-white">
-        <p>{pets.name}</p>
-        <p>{pets.breed}</p>
+      <div className="text-white text-2xl">
+        <p className="text-white font-bold text-2xl">{pets.name}</p>
+        <p className=" text-2xl">{pets.breed}</p>
+        <p className=" text-2xl underline">{pets.user.username}</p>
       </div>
     </div>
   );

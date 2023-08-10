@@ -10,17 +10,12 @@ function PetsFeed({ handleJobModal, handlePetModal, loading, pets, user }) {
   if (loading) return <div></div>;
 
   return (
-    <div className="h-screen mt-10">
-      {/* <Header /> */}
-      <AddPetandJob
-        handleJobModal={handleJobModal}
-        handlePetModal={handlePetModal}
-      />
-      <div className="flex justify-between">
+    <div className="h-screen mt-10 flex">
+   
         <ProfileWidget pet={pets} user={user} />
         <PetGallery pets={pets} />
         <AdGallery />
-      </div>
+      
     </div>
   );
 }
